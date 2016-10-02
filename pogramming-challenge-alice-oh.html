@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Programming challenge</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<style>
+  body {font-family: 'Roboto', sans-serif;}
+  h1 {color:#0066cc}
+  #firstOutput {margin-bottom:40px;}
+</style>
+</head>
+<body>
+<h1 id="firstGender"></h1>
+<ul id="firstOutput"></ul>
+<h1 id="secondGender"></h1>
+<ul id="secondOutput"></ul>
+<script>
+var array= ([{"name":"Bob","gender":"Male","age":23,"pets":[{"name":"Garfield","type":"Cat"},{"name":"Fido","type":"Dog"}]},{"name":"Jennifer","gender":"Female","age":18,"pets":[{"name":"Garfield","type":"Cat"}]},{"name":"Steve","gender":"Male","age":45,"pets":null},{"name":"Fred","gender":"Male","age":40,"pets":[{"name":"Tom","type":"Cat"},{"name":"Max","type":"Cat"},{"name":"Sam","type":"Dog"},{"name":"Jim","type":"Cat"}]},{"name":"Samantha","gender":"Female","age":40,"pets":[{"name":"Tabby","type":"Cat"}]},{"name":"Alice","gender":"Female","age":64,"pets":[{"name":"Simba","type":"Cat"},{"name":"Nemo","type":"Fish"}]}]);
+
+function GetSortOrder(prop){
+   return function(a,b){ 
+	 if( a[prop] > b[prop]){
+          return 1;
+      }else if( a[prop] < b[prop] ){
+          return -1;
+      }
+      return 0;
+   }
+}
+array.sort( GetSortOrder("name") );
+
+for (var i = 0; i < array.length; i++) {
+	var petexist = array[i].pets;	
+	if (petexist != null) {
+	for (var j = 0; j < petexist.length; j++) {
+		if (petexist[j].type == "Cat") {
+			var petname = petexist[j].name
+			if (array[i].gender == "Female") {
+				document.getElementById("firstGender").innerHTML = array[i].gender;
+				document.getElementById("firstOutput").innerHTML += "<li>"+petname+"</li>";			
+			} else {
+				document.getElementById("secondGender").innerHTML = array[i].gender;
+				document.getElementById("secondOutput").innerHTML += "<li>"+petname+"</li>";
+			}
+			}
+		};
+	};
+};
+</script>
+</body>
+</html>
